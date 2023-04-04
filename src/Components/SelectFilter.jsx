@@ -3,14 +3,13 @@ import { BsCheck } from "react-icons/bs";
 import * as Select from "@radix-ui/react-select";
 import { useState, forwardRef } from "react";
 
-function SelectFilter() {
+function SelectFilter({ selectedItem, setSelectedItem }) {
   const feedBackFilter = [
     "Most Upvotes",
     "Least Upvotes",
     "Most Comments",
     "Least Comments",
   ];
-  const [selectedItem, setSelectedItem] = useState(feedBackFilter[0]);
   return (
     <Select.Root value={selectedItem} onValueChange={setSelectedItem}>
       <Select.Trigger
@@ -31,7 +30,11 @@ function SelectFilter() {
           <Select.Viewport className="SelectViewport">
             <Select.Group>
               {feedBackFilter.map((filter) => {
-                return <SelectItem value={filter}>{filter}</SelectItem>;
+                return (
+                  <SelectItem key={filter} value={filter}>
+                    {filter}
+                  </SelectItem>
+                );
               })}
             </Select.Group>
           </Select.Viewport>

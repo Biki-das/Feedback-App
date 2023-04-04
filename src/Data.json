@@ -2,13 +2,18 @@
   {
     "id": 1,
     "name": "John doe",
-    "timestamp": "14sep,2022",
+    "timestamp": "14 sep,2022",
     "imageUrl": "https://avatars.dicebear.com/api/avataaars/573cd8a3-c38e-4673-afd2-d9ac806ebabb.svg",
     "commentVotes": 80,
     "feedbacktitle": "Apple music UI revamp",
-    "feedbackdetail": "We need to Make the UI more minimal and easy to naviigate",
+    "feedbackdetail": "We need to Make the UI more minimal and easy to navigate",
     "category": "UI",
     "comments": [
+      {
+        "name": "Hali dae",
+        "timestamp": "14sep,2022",
+        "comment": "Hehehe"
+      },
       {
         "name": "Hali dae",
         "timestamp": "14sep,2022",
@@ -19,7 +24,7 @@
   {
     "id": 2,
     "name": "Daisy milano",
-    "timestamp": "15sep,2022",
+    "timestamp": "15 sep,2022",
     "imageUrl": "https://avatars.dicebear.com/api/avataaars/8e90bbeb-824e-45bb-ad90-c46ad78d874e.svg",
     "commentVotes": 73,
     "feedbacktitle": "ios 16 lockscreen update",
@@ -30,19 +35,34 @@
         "name": "Tim cook",
         "timestamp": "14 sep,2022",
         "comment": "i am calling out craig now"
+      },
+      {
+        "name": "Tim cook",
+        "timestamp": "14 sep,2022",
+        "comment": "i am calling out craig now"
+      },
+      {
+        "name": "Tim cook",
+        "timestamp": "14 sep,2022",
+        "comment": "i am calling out craig now"
       }
     ]
   },
   {
     "id": 3,
     "name": "Sun xuhan",
-    "timestamp": "18sep,2022",
+    "timestamp": "18 sep,2022",
     "imageUrl": "https://api.dicebear.com/6.x/open-peeps/svg?seed=Chester",
-    "commentVotes": 73,
+    "commentVotes": 65,
     "feedbacktitle": "home screen icons are not displaying correct size",
     "feedbackdetail": "the new home screen icon size is not accurate with the design",
     "category": "Bug",
     "comments": [
+      {
+        "name": "Sam hill",
+        "timestamp": "21 sep,2022",
+        "comment": "Sent me a reproduction of the same!"
+      },
       {
         "name": "Sam hill",
         "timestamp": "21 sep,2022",
@@ -53,9 +73,9 @@
   {
     "id": 4,
     "name": "Grag rosky",
-    "timestamp": "18sep,2022",
+    "timestamp": "18 sep,2022",
     "imageUrl": "https://api.dicebear.com/6.x/open-peeps/svg?seed=Chester",
-    "commentVotes": 73,
+    "commentVotes": 68,
     "feedbacktitle": "Adding apple watch support for new apps",
     "feedbackdetail": "we are planning to increase support for new apps in the apple watch store",
     "category": "Feature",
@@ -70,12 +90,23 @@
   {
     "id": 5,
     "name": "Marry riches",
-    "timestamp": "28sep,2022",
+    "timestamp": "28 sep,2022",
     "imageUrl": "https://api.dicebear.com/6.x/open-peeps/svg?seed=Boots",
-    "commentVotes": 73,
+    "commentVotes": 52,
     "feedbacktitle": "Adding support for ios 16 in iphone 7,iphone 8 and other lower iphone models",
     "feedbackdetail": "we are planning to increase support for older iphones",
     "category": "Feature",
+    "comments": []
+  },
+  {
+    "id": 6,
+    "name": "Craig Ralph",
+    "timestamp": "4 Nov,2022",
+    "imageUrl": "https://api.dicebear.com/6.x/open-peeps/svg?seed=Boots",
+    "commentVotes": 21,
+    "feedbacktitle": "Safari desktop needs a more user customised based settings",
+    "feedbackdetail": "The current safari desktop lacks Customisation for the User",
+    "category": "UX",
     "comments": []
   }
 ]
