@@ -6,7 +6,6 @@ export default {
       animation: {
         slideright: "slideright 1s",
         slideLeft: "slideleft 1s",
-        
       },
       keyframes: {
         slideright: {
@@ -18,6 +17,11 @@ export default {
           "100%": { opacity: "1", transform: "none" },
         },
       },
+    },
+  },
+  variants: {
+    extend: {
+      animation: ["motion-safe"],
     },
   },
 };

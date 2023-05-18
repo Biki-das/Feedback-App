@@ -22,7 +22,7 @@ function SignIn() {
       } else {
         successNotify();
         setTimeout(() => {
-          navigate("/");
+          navigate("/", toast.remove());
         }, 1000);
       }
     } catch (error) {

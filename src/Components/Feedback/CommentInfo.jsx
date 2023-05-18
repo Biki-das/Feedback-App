@@ -1,6 +1,6 @@
 import { FaRegComment } from "react-icons/fa";
 
-function Commentbutton({ comments }) {
+function CommentInfo({ comments }) {
   return (
     <div className="flex items-end md:items-center">
       <a className="flex items-center gap-x-2" href="/">
@@ -11,4 +11,4 @@ function Commentbutton({ comments }) {
   );
 }
 
-export default Commentbutton;
+export default CommentInfo;

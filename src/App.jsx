@@ -9,6 +9,7 @@ import React from "react";
 import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";
 import ProtectedRoute from "./Components/Route/ProtectedRoute";
+import FeedbackDetail from "./Components/Feedback/FeedbackDetail";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
           element={
             <Provider store={store}>
               <AuthTab />
+            </Provider>
+          }
+        />
+        <Route
+          path="/feedback/:id"
+          element={
+            <Provider store={store}>
+              <FeedbackDetail />
             </Provider>
           }
         />

@@ -66,7 +66,7 @@ function FeedbackForm({ currentUser }) {
   });
 
   async function createFeedback() {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("feedback")
       .insert([
         {

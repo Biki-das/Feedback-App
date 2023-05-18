@@ -31,7 +31,7 @@ function SignUp({ avatarUrl, setUser }) {
         const id = data.user.id;
         const email = data.user.email;
         insertUser(id, email);
-        navigate("/");
+        navigate("/", toast.remove());
       }, 1000);
     }
   }
