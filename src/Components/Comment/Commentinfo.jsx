@@ -1,3 +1,5 @@
+import { formatFeedbackDate } from "../Utils/DateUtil";
+
 function Commentinfo({
   avatarUrl,
   name,
@@ -7,28 +9,31 @@ function Commentinfo({
   category,
 }) {
   return (
-    <div>
+    <div className="order-1 md:order-2">
       <div className="flex flex-col">
         <div className="flex gap-x-2">
           <img
-            className="h-[40px] w-[40px] rounded-full object-cover"
+            className="h-[30px] w-[30px] rounded-full object-cover"
             src={avatarUrl}
             alt="profile"
           />
           <div>
-            <p className="font-medium text-base">{name}</p>
-            <p className="text-sm text-blue-500">{feedbackDate}</p>
+            <p className="font-medium text-sm">{name}</p>
+            {}
+            <p className="text-sm text-blue-500">
+              {formatFeedbackDate(feedbackDate)}
+            </p>
           </div>
         </div>
         <div className="mt-2">
-          <p className="font-bold">
-            {feedbackTitle.length > 50
+          <p className="font-bold text-base">
+            {feedbackTitle.length > 60
               ? feedbackTitle.substring(0, 50) + "..."
               : feedbackTitle}{" "}
           </p>
-          <p>
-            {feedbackDetail.length > 70
-              ? feedbackDetail.substring(0, 60) + "...."
+          <p className="text-sm">
+            {feedbackDetail.length > 180
+              ? feedbackDetail.substring(0, 150) + "...."
               : feedbackDetail}
           </p>
         </div>

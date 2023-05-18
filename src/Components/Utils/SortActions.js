@@ -1,12 +1,14 @@
+import { supabase } from "../Supabase/Supabaseconfig";
+
 export const actions = {
   "Most Upvotes": (a, b) => {
-    const A = a.commentVotes;
-    const B = b.commentVotes;
+    const A = a.upvotes.length;
+    const B = b.upvotes.length;
     return B - A;
   },
   "Least Upvotes": (a, b) => {
-    const A = a.commentVotes;
-    const B = b.commentVotes;
+    const A = a.upvotes.length;
+    const B = b.upvotes.length;
     return A - B;
   },
   "Most Comments": (a, b) => {

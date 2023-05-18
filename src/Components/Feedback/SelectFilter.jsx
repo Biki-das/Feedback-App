@@ -1,22 +1,24 @@
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
 import * as Select from "@radix-ui/react-select";
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
+import { connect } from "react-redux";
+import { updateOptions } from "../Store/Sort/action";
 
-function SelectFilter({ selectedItem, setSelectedItem }) {
+function SelectFilter({ initalOptions, updateOptions }) {
   const feedBackFilter = [
     "Most Upvotes",
     "Least Upvotes",
-    "Most Comments",
-    "Least Comments",
+    // "Most Comments",
+    // "Least Comments",
   ];
   return (
-    <Select.Root value={selectedItem} onValueChange={setSelectedItem}>
+    <Select.Root value={initalOptions} onValueChange={updateOptions}>
       <Select.Trigger
         className="SelectTrigger ml-2 text-white font-bold flex items-center focus:border border-purple-500"
-        aria-label={selectedItem}
+        aria-label={updateOptions}
       >
-        <Select.Value placeholder={selectedItem} />
+        <Select.Value placeholder={updateOptions} />
         <Select.Icon className="SelectIcon">
           <AiOutlineArrowDown className="ml-2" />
         </Select.Icon>
@@ -26,6 +28,11 @@ function SelectFilter({ selectedItem, setSelectedItem }) {
           onCloseAutoFocus={(e) => e.preventDefault()}
           position="popper"
           className="SelectContent bg-white overflow-hidden rounded-md shadow-md w-[280px] mt-7"
+          style={{
+            popperModifiers: {
+              preventOverflow: { boundariesElement: "viewport" },
+            },
+          }}
         >
           <Select.Viewport className="SelectViewport">
             <Select.Group>
@@ -61,4 +68,14 @@ const SelectItem = forwardRef(({ children, ...props }, forwardedRef) => {
   );
 });
 
-export default SelectFilter;
+function mapStateToProps(state) {
+  return {
+    initalOptions: state.sort,
+  };
+}
+
+const mapDispatchToProps = {
+  updateOptions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectFilter);

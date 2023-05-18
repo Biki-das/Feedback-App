@@ -4,20 +4,20 @@ export default {
   theme: {
     extend: {
       animation: {
-        slideright: "slideright 1.5s ease-in-out",
-        slideLeft: "slideleft 1.5s ease-in-out",
+        slideright: "slideright 1s",
+        slideLeft: "slideleft 1s",
+        
       },
       keyframes: {
-        slideleft: {
-          "0%": { transform: "translateX(100%)", opacity: "0" },
+        slideright: {
+          "0%": { transform: "translateX(100%)" },
           "100%": { opacity: "1", transform: "none" },
         },
-        slideright: {
-          "0%": { transform: "translateX(-100%)", opacity: "0" },
+        slideleft: {
+          "0%": { transform: "translateX(-100%)" },
           "100%": { opacity: "1", transform: "none" },
         },
       },
     },
   },
-  plugins: [],
 };
