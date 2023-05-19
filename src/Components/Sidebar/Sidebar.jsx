@@ -1,4 +1,4 @@
-import Sidebarcard from "./SideBarCard";
+import SideBarCard from "./SideBarCard";
 import RoadmapCard from "./RoadmapCard";
 import Filtercard from "./Filtercard";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -36,7 +36,7 @@ function SideBar({ setUser, currentUser, clearUser }) {
 
   return (
     <div className="w-full mx-auto lg:w-[30%] items-center xl:items-baseline flex gap-x-6 lg:flex-col gap-y-5 lg:fixed lg:my-auto animate-slideLeft">
-      <Sidebarcard currentUser={currentUser} />
+      <SideBarCard currentUser={currentUser} />
       {<Filtercard />}
       <RoadmapCard />
       <GiHamburgerMenu
