@@ -1,5 +1,3 @@
-import { supabase } from "../Supabase/Supabaseconfig";
-
 export const actions = {
   "Most Upvotes": (a, b) => {
     const A = a.upvotes.length;

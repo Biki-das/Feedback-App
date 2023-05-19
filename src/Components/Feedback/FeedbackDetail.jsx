@@ -7,9 +7,10 @@ import UpvoteButtonContainer from "./UpvoteButtonContainer";
 import { Loader } from "../Utils/Loader";
 import { connect } from "react-redux";
 import { toast } from "react-hot-toast";
+import ComposeComment from "../Comment/ComposeComment";
 
 function FeedbackDetail({ currentUser }) {
-  const [feedbackDetail, setFeedbackDetail] = useState();
+  const [feedbackDetail, setFeedbackDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -40,29 +41,32 @@ function FeedbackDetail({ currentUser }) {
       {loading ? (
         <Loader />
       ) : (
-        <div className="bg-white rounded-lg mx-auto mt-14 relative p-4 flex justify-center items-center min-h-[250px]">
-          <div className="flex flex-col md:flex-row md:w-full gap-x-6">
-            {feedbackDetail && (
-              <UpvoteButtonContainer
-                feedbackId={id}
-                userId={currentUser.user?.id}
-                upvotes={feedbackDetail.upvotes}
-              />
-            )}
+        <>
+          <div className="bg-white rounded-lg mx-auto mt-8 relative p-4 flex justify-center items-center min-h-[250px]">
+            <div className="flex flex-col md:flex-row md:w-full gap-x-6">
+              {feedbackDetail && (
+                <UpvoteButtonContainer
+                  feedbackId={id}
+                  userId={currentUser.user?.id}
+                  upvotes={feedbackDetail.upvotes}
+                />
+              )}
 
-            {feedbackDetail && (
-              <Feedbackinfo
-                avatarUrl={feedbackDetail.user_avatar}
-                name={feedbackDetail.username}
-                feedbackDate={feedbackDetail.creation_time}
-                feedbackTitle={feedbackDetail.title}
-                feedbackDetail={feedbackDetail.description}
-                category={feedbackDetail.category}
-                isDetailPage={true}
-              />
-            )}
+              {feedbackDetail && (
+                <Feedbackinfo
+                  avatarUrl={feedbackDetail.user_avatar}
+                  name={feedbackDetail.username}
+                  feedbackDate={feedbackDetail.creation_time}
+                  feedbackTitle={feedbackDetail.title}
+                  feedbackDetail={feedbackDetail.description}
+                  category={feedbackDetail.category}
+                  isDetailPage={true}
+                />
+              )}
+            </div>
           </div>
-        </div>
+          <ComposeComment />
+        </>
       )}
     </main>
   );

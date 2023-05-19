@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../Supabase/Supabaseconfig";
 import toast from "react-hot-toast";
-import { ArrowUp } from "react-feather";
+import { ChevronUp } from "react-feather";
 
 function Upvotebutton({ feedbackId, userId, upvotes }) {
   const [localUpvotes, setLocalUpvotes] = useState(upvotes);
@@ -60,9 +60,9 @@ function Upvotebutton({ feedbackId, userId, upvotes }) {
         onClick={() => {
           userId ? toggleUpvotes() : unAuthenticatedError();
         }}
-        className={`bg-blue-50 h-[45px] w-[45px] rounded-md flex flex-row md:flex-col items-center justify-center`}
+        className={`bg-blue-50 h-[25px] w-[50px] md:h-[45px] md:w-[45px] rounded-md flex flex-row md:flex-col items-center justify-center gap-x-2`}
       >
-        <ArrowUp color={`${isUpvotedByUser ? "red" : "black"}`} size={14} />
+        <ChevronUp color={`${isUpvotedByUser ? "red" : "blue"}`} size={14} />
         <span className="text-sm font-bold text-gray-600">
           {localUpvotes.length}
         </span>
