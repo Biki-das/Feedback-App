@@ -1,4 +1,4 @@
-import Sidebarcard from "./Sidebarcard";
+import Sidebarcard from "./SideBarCard";
 import RoadmapCard from "./Roadmapcard";
 import Filtercard from "./Filtercard";
 import { GiHamburgerMenu } from "react-icons/gi";
