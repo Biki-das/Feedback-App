@@ -18,7 +18,7 @@ function App() {
         <Route
           path="/"
           element={
-            <main className="md:w-11/12 lg:w-[1100px] mx-auto md:mt-12 lg:flex relative">
+            <main className="md:w-11/12 lg:w-[950px] mx-auto md:mt-12 lg:flex relative">
               <Provider store={store}>
                 <SideBar />
                 <Feedback />
