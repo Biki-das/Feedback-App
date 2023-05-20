@@ -1,7 +1,7 @@
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
 import * as Select from "@radix-ui/react-select";
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import { connect } from "react-redux";
 import { updateOptions } from "../Store/Sort/action";
 
@@ -12,11 +12,23 @@ function SelectFilter({ initalOptions, updateOptions }) {
     // "Most Comments",
     // "Least Comments",
   ];
+
+  const selectRef = useRef();
+
+  const handleSelectClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Select.Root value={initalOptions} onValueChange={updateOptions}>
+    <Select.Root
+      value={initalOptions}
+      onValueChange={updateOptions}
+      ref={selectRef}
+    >
       <Select.Trigger
         className="SelectTrigger ml-2 text-white font-bold flex items-center focus:border border-purple-500"
         aria-label={updateOptions}
+        onClick={handleSelectClick}
       >
         <Select.Value placeholder={updateOptions} />
         <Select.Icon className="SelectIcon">

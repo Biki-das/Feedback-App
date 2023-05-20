@@ -84,7 +84,6 @@ function FeedbackForm({ currentUser }) {
       });
 
     if (error) {
-      console.log(error);
       return null;
     }
   }
