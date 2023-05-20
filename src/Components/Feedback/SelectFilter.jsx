@@ -15,8 +15,8 @@ function SelectFilter({ initalOptions, updateOptions }) {
 
   const selectRef = useRef();
 
-  const handleSelectClick = (e) => {
-    e.stopPropagation();
+  const handleTouchMove = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -28,7 +28,6 @@ function SelectFilter({ initalOptions, updateOptions }) {
       <Select.Trigger
         className="SelectTrigger ml-2 text-white font-bold flex items-center focus:border border-purple-500"
         aria-label={updateOptions}
-        onClick={handleSelectClick}
       >
         <Select.Value placeholder={updateOptions} />
         <Select.Icon className="SelectIcon">
@@ -45,6 +44,7 @@ function SelectFilter({ initalOptions, updateOptions }) {
               preventOverflow: { boundariesElement: "viewport" },
             },
           }}
+          onTouchMove={handleTouchMove}
         >
           <Select.Viewport className="SelectViewport">
             <Select.Group>

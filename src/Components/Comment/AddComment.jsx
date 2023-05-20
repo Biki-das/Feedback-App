@@ -34,7 +34,7 @@ function AddComment({ maxChars }) {
           }}
         />
       </form>
-      <div className="w-[90%] mx-auto mt-4 flex justify-between py-1">
+      <div className="w-[90%] mx-auto mt-4 flex justify-between py-1 items-center">
         <p
           className={`${getCharColor(
             charsRemaining
@@ -42,7 +42,7 @@ function AddComment({ maxChars }) {
         >
           {charsRemaining} Characters left
         </p>
-        <button className="bg-purple-600 text-white p-2 rounded-md">
+        <button className="bg-purple-600 text-white w-[150px] h-[50px] rounded-md text-sm font-bold">
           Add Comment
         </button>
       </div>
