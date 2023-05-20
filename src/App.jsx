@@ -1,5 +1,5 @@
 import "./App.css";
-import SideBar from "./Components/SideBar/SideBar";
+import SideBar from "./Components/SideBarComponent/SideBar";
 import Feedback from "./Components/Feedback/FeedbackList";
 import Roadmap from "./Components/Roadmap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { connect } from "react-redux";
 import { updateFilter } from "../Store/Filter/action";
 
