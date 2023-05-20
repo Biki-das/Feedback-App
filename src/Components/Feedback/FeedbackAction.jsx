@@ -7,12 +7,12 @@ function FeedbackAction({ feedback }) {
 
   return (
     <div className="w-full bg-[#373F68] justify-around h-[70px] flex items-center md:rounded-lg sticky top-0 md:relative z-20">
-      <div className="flex p-2 gap-x-9">
+      <div className="flex p-2 gap-x-9 items-center">
         <div className="hidden md:flex">
           <AiOutlineBulb color="white" size={28} />
           <p className="text-white font-bold text-lg">{feedback} Suggestions</p>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center relative">
           <p className="text-white text-sm">Sort by:</p>
           <SelectFilter />
         </div>

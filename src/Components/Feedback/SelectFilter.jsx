@@ -1,88 +1,69 @@
-import { AiOutlineArrowDown } from "react-icons/ai";
-import { BsCheck } from "react-icons/bs";
-import * as Select from "@radix-ui/react-select";
-import { forwardRef, useRef } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import { connect } from "react-redux";
 import { updateOptions } from "../Store/Sort/action";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { ChevronDown } from "react-feather";
 
-function SelectFilter({ initalOptions, updateOptions }) {
-  const feedBackFilter = [
+function SelectFilter({ initialOptions, updateOptions }) {
+  const feedbackFilter = [
     "Most Upvotes",
     "Least Upvotes",
     // "Most Comments",
     // "Least Comments",
   ];
 
-  const selectRef = useRef();
-
-  const handleTouchMove = (e) => {
-    e.preventDefault();
-  };
-
   return (
-    <Select.Root
-      value={initalOptions}
-      onValueChange={updateOptions}
-      ref={selectRef}
-    >
-      <Select.Trigger
-        className="SelectTrigger ml-2 text-white font-bold flex items-center focus:border border-purple-500"
-        aria-label={updateOptions}
-      >
-        <Select.Value placeholder={updateOptions} />
-        <Select.Icon className="SelectIcon">
-          <AiOutlineArrowDown className="ml-2" />
-        </Select.Icon>
-      </Select.Trigger>
-      <Select.Portal className="">
-        <Select.Content
-          onCloseAutoFocus={(e) => e.preventDefault()}
-          position="popper"
-          className="SelectContent bg-white overflow-hidden rounded-md shadow-md w-[280px] mt-7"
-          style={{
-            popperModifiers: {
-              preventOverflow: { boundariesElement: "viewport" },
-            },
-          }}
-          onTouchMove={handleTouchMove}
+    <div>
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            {initialOptions}
+            <ChevronDown
+              className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+            />
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
         >
-          <Select.Viewport className="SelectViewport">
-            <Select.Group>
-              {feedBackFilter.map((filter) => {
+          <Menu.Items className="absolute md:right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              {feedbackFilter.map((filter) => {
                 return (
-                  <SelectItem key={filter} value={filter}>
-                    {filter}
-                  </SelectItem>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={(e) => {
+                          updateOptions(e.target.textContent);
+                        }}
+                        className={`${
+                          active ? "bg-violet-500 text-white" : "text-gray-900"
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                      >
+                        {filter}
+                      </button>
+                    )}
+                  </Menu.Item>
                 );
               })}
-            </Select.Group>
-          </Select.Viewport>
-        </Select.Content>
-      </Select.Portal>
-    </Select.Root>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </div>
   );
 }
 
-const SelectItem = forwardRef(({ children, ...props }, forwardedRef) => {
-  return (
-    <div className="first:border border-b p-2">
-      <Select.Item
-        {...props}
-        className="flex items-center justify-between h-[30px] data-[highlighted]:outline-none cursor-pointer data-[highlighted]:text-purple-600 transition-colors duration-[0.3s] select-none"
-        ref={forwardedRef}
-      >
-        <Select.ItemText>{children}</Select.ItemText>
-        <Select.ItemIndicator className="SelectItemIndicator">
-          <BsCheck size={28} />
-        </Select.ItemIndicator>
-      </Select.Item>
-    </div>
-  );
-});
-
 function mapStateToProps(state) {
   return {
-    initalOptions: state.sort,
+    initialOptions: state.sort,
   };
 }
 
