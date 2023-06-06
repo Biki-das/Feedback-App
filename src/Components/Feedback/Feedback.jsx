@@ -1,5 +1,6 @@
 import Feedbackinfo from "./Feedbackinfo";
 import UpvotebuttonContainer from "./UpvoteButtonContainer";
+import CommentInfo from "./CommentInfo";
 
 function Feedback({ feedback, userId }) {
   return (
@@ -20,7 +21,7 @@ function Feedback({ feedback, userId }) {
           category={feedback.category}
         />
       </div>
-      {/* <Commentbutton comments={feedback.comments.length} /> */}
+      <CommentInfo comments={feedback.comments} />
     </li>
   );
 }

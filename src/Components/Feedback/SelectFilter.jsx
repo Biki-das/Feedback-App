@@ -1,15 +1,15 @@
 import { Menu, Transition } from "@headlessui/react";
 import { connect } from "react-redux";
 import { updateOptions } from "../Store/Sort/action";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 import { ChevronDown } from "react-feather";
 
 function SelectFilter({ initialOptions, updateOptions }) {
   const feedbackFilter = [
     "Most Upvotes",
     "Least Upvotes",
-    // "Most Comments",
-    // "Least Comments",
+    "Most Comments",
+    "Least Comments",
   ];
 
   return (

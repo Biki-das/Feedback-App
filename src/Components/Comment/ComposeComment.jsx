@@ -1,7 +1,13 @@
-import AddComment from "./AddComment";
+import Comment from "./AddComment";
 
-function ComposeComment() {
-  return <AddComment maxChars={250} />;
+function ComposeComment({ feedbackId, feedbackComments }) {
+  return (
+    <Comment
+      maxChars={250}
+      feedbackId={feedbackId}
+      feedbackComments={feedbackComments}
+    />
+  );
 }
 
 export default ComposeComment;

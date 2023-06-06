@@ -19,7 +19,7 @@ function FeedbackDetail({ currentUser }) {
     async function getFeedback() {
       let { data } = await supabase
         .from(`feedback`)
-        .select("*, upvotes(*)")
+        .select("*, upvotes(*), comments(*)")
         .eq("id", id)
         .limit(1);
       setFeedbackDetail(data[0]);
@@ -28,6 +28,7 @@ function FeedbackDetail({ currentUser }) {
   }, []);
   return (
     <main className="w-[90%] lg:w-[40%] mx-auto">
+      {console.log(feedbackDetail)}
       <button
         className="flex items-center gap-x-4 text-gray-600 font-bold mt-8"
         onClick={() => {
@@ -65,7 +66,10 @@ function FeedbackDetail({ currentUser }) {
               )}
             </div>
           </div>
-          <ComposeComment />
+          <ComposeComment
+            feedbackId={id}
+            feedbackComments={feedbackDetail.comments}
+          />
         </>
       )}
     </main>

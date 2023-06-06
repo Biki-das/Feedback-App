@@ -16,7 +16,9 @@ function FeedbackList({ options, filters, currentUser }) {
   useEffect(() => {
     getFeedback();
     async function getFeedback() {
-      let { data } = await supabase.from("feedback").select("*, upvotes(*)");
+      let { data } = await supabase
+        .from("feedback")
+        .select("*, upvotes(*),comments(*)");
       setLoading(false);
       setFeedback(data);
     }
@@ -26,7 +28,6 @@ function FeedbackList({ options, filters, currentUser }) {
     <div className="lg:absolute static lg:w-8/12 lg:right-0 md:mt-8 lg:mt-auto animate-slideright">
       <FeedbackAction
         feedback={feedbacks.filter(FilterActions[filters]).length}
-        comment={feedbacks.comments}
       />
       {loading ? (
         <Loader />
