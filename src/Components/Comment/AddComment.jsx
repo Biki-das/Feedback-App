@@ -92,6 +92,7 @@ function Comment({ maxChars, feedbackId }) {
           </label>
           <textarea
             required
+            disabled={!user}
             rows={3}
             className="bg-[#F7F8FD] mt-4 focus:outline-blue-300 w-full p-2 rounded-md"
             id="comment"
