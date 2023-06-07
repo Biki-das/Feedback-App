@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "../Supabase/Supabaseconfig";
 import { useSelector } from "react-redux";
 import CommentList from "./Commentlist";
 import toast from "react-hot-toast";
 
-function Comment({ maxChars, feedbackId }) {
+function AddComment({ maxChars, feedbackId }) {
   useEffect(() => {
     getComments();
   }, []);
 
+  const commentListRef = useRef(null);
   const [comment, setComment] = useState("");
   const [feedbackComments, setFeedbackComments] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,7 @@ function Comment({ maxChars, feedbackId }) {
         setLoading(false);
         commentNotify();
         getComments();
+        commentListRef.current.scrollIntoView({ behavior: "smooth" });
       });
   }
 
@@ -124,9 +126,12 @@ function Comment({ maxChars, feedbackId }) {
           </button>
         </div>
       </div>
-      <CommentList feedbackComments={feedbackComments} />
+      <CommentList
+        feedbackComments={feedbackComments}
+        commentListRef={commentListRef}
+      />
     </>
   );
 }
 
-export default Comment;
+export default AddComment;
