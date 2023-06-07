@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../Supabase/Supabaseconfig";
 import { useSelector } from "react-redux";
 import CommentList from "./Commentlist";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Comment({ maxChars, feedbackId }) {
   useEffect(() => {

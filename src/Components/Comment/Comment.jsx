@@ -1,6 +1,6 @@
 function Comment({ avatar, name, email, comment }) {
   return (
-    <div className="bg-white flex py-4 mt-6 relative border-b-[0.8px] border-gray-30 items-start">
+    <div className="bg-white flex py-4 mt-6 relative border-b-[0.8px] border-gray-30 items-start justify-between">
       <div className="flex gap-x-6">
         <img src={avatar} className="h-[30px] w-[30px] rounded-full" />
         <div>

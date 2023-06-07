@@ -28,7 +28,6 @@ function FeedbackDetail({ currentUser }) {
   }, []);
   return (
     <main className="w-[90%] lg:w-[40%] mx-auto">
-      {console.log(feedbackDetail)}
       <button
         className="flex items-center gap-x-4 text-gray-600 font-bold mt-8"
         onClick={() => {
