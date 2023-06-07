@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function RoadmapCard() {
   return (
     <div className="hidden bg-white w-[280px] h-[150px] md:h-[200px] 2xl:h-[200px] rounded-md p-4 items-center gap-x-2 md:flex flex-col justify-between">
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full items-center">
         <p className="text-lg font-bold">Roadmap</p>
         <Link to="/roadmap">
           <p className="text-blue-500">view</p>

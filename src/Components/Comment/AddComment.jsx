@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../Supabase/Supabaseconfig";
 import { useSelector } from "react-redux";
 import CommentList from "./Commentlist";
+import toast, { Toaster } from "react-hot-toast";
 
 function Comment({ maxChars, feedbackId }) {
   useEffect(() => {
@@ -15,6 +16,8 @@ function Comment({ maxChars, feedbackId }) {
   const user = useSelector((state) => {
     return state.currentUser.user;
   });
+
+  const commentNotify = () => toast.success("comment Added successfully");
 
   function getCharColor(charsRemaining) {
     if (charsRemaining < 0) {
@@ -40,6 +43,7 @@ function Comment({ maxChars, feedbackId }) {
       })
       .then(() => {
         setLoading(false);
+        commentNotify();
         getComments();
       });
   }
@@ -65,7 +69,6 @@ function Comment({ maxChars, feedbackId }) {
 
     postComment();
     setComment(""); // Clear the comment textarea
-    getComments();
   }
 
   function Loader() {

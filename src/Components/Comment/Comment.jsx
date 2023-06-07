@@ -5,7 +5,7 @@ function Comment({ avatar, name, email, comment }) {
         <img src={avatar} className="h-[30px] w-[30px] rounded-full" />
         <div>
           <div>
-            <p className="font-bold">{name}</p>
+            <p className="font-bold text-gray-600">{name}</p>
             <p className="text-gray-600">{email}</p>
           </div>
           <p className="text-gray-600 mt-6">{comment}</p>

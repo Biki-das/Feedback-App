@@ -5,7 +5,7 @@ function CommentInfo({ comments }) {
     <div className="flex items-end md:items-center ml-2">
       <a className="flex items-center gap-x-1" href="/">
         <MessageCircle fill="#CDD2EE" stroke="white" />
-        <span className="font-bold">{comments.length}</span>
+        <span className="font-bold text-gray-600">{comments.length}</span>
       </a>
     </div>
   );
