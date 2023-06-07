@@ -179,7 +179,10 @@ function FeedbackForm({ currentUser }) {
                 >
                   Cancel
                 </button>
-                <button className="bg-purple-600 text-white items-center font-bold p-2 w-[150px] h-[40px] justify-center rounded-md cursor-pointer hover:bg-purple-400 transition-[background] duration-[0.3s] text-sm">
+                <button
+                  disabled={title.length === 0 || description.length === 0}
+                  className="disabled:opacity-70 bg-purple-600 text-white items-center font-bold p-2 w-[150px] h-[40px] justify-center rounded-md cursor-pointer hover:bg-purple-400 transition-[background] duration-[0.3s] text-sm"
+                >
                   Add Feedback
                 </button>
               </div>

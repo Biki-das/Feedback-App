@@ -1,7 +1,7 @@
 import React from "react";
 import { RemoveScroll } from "react-remove-scroll";
 import { connect } from "react-redux";
-import { updateFilter } from "../Store/Filter/action";
+import { updateFilter } from "../Redux/Filter/action";
 import { Link } from "react-router-dom";
 
 function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {

@@ -4,7 +4,7 @@ import Feedback from "./Components/Feedback/FeedbackList";
 import Roadmap from "./Components/Roadmap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./Components/Store";
+import { store } from "./Components/Redux";
 import React from "react";
 import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";
