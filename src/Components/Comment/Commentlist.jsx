@@ -1,7 +1,6 @@
 import Comment from "./Comment";
 
 function CommentList({ feedbackComments, commentListRef }) {
-  console.log(commentListRef);
   const latestComments = feedbackComments.slice().reverse();
 
   return (

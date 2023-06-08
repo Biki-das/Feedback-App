@@ -5,7 +5,7 @@ import Feedback from "./Feedback";
 import { actions } from "../Utils/SortActions";
 import { FilterActions } from "../Utils/FilterActions";
 import { connect } from "react-redux";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { Loader } from "../Utils/Loader";
 
 function FeedbackList({ options, filters, currentUser }) {

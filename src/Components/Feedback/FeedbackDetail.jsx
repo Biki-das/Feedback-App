@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import Feedbackinfo from "./Feedbackinfo";
 import UpvoteButtonContainer from "./UpvoteButtonContainer";

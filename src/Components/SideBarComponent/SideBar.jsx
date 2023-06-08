@@ -4,9 +4,9 @@ import Filtercard from "./Filtercard";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Mobilesidebar from "./Mobilesidebar";
 import React from "react";
-import { setUser, clearUser } from "../Redux/User/action";
+import { setUser, clearUser } from "../../Redux/User/action";
 import { connect } from "react-redux";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 
 function SideBar({ setUser, currentUser, clearUser }) {
   const [showSideBar, setShowSideBar] = React.useState(false);

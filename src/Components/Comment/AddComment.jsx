@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { useSelector } from "react-redux";
 import CommentList from "./Commentlist";
 import toast from "react-hot-toast";

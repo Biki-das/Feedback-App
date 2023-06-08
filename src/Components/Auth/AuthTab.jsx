@@ -5,7 +5,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { RemoveScroll } from "react-remove-scroll";
 import { connect } from "react-redux";
-import { setUser } from "../Redux/User/action";
+import { setUser } from "../../Redux/User/action";
 
 function TabsDemo({ setUser }) {
   const location = useLocation();

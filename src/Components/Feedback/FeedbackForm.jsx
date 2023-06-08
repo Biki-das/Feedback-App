@@ -5,7 +5,7 @@ import { BsCheck } from "react-icons/bs";
 import * as Select from "@radix-ui/react-select";
 import { forwardRef, useState } from "react";
 import { connect } from "react-redux";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { v4 as uuidv4 } from "uuid";
 import { DateStamp } from "../Utils/DateUtil";
 

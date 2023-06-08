@@ -1,6 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { connect } from "react-redux";
-import { updateOptions } from "../Redux/Sort/action";
+import { updateOptions } from "../../Redux/Sort/action";
 import { Fragment } from "react";
 import { ChevronDown } from "react-feather";
 

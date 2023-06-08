@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { updateFilter } from "../Redux/Filter/action";
+import { updateFilter } from "../../Redux/Filter/action";
 
 function Filtercard({ updateFilter, currentFilter }) {
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];

@@ -1,10 +1,10 @@
 import "./App.css";
 import SideBar from "./Components/SideBarComponent/SideBar";
 import Feedback from "./Components/Feedback/FeedbackList";
-import Roadmap from "./Components/Roadmap";
+import Roadmap from "./Components/Roadmap/Roadmap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./Components/Redux";
+import { store } from "./Redux";
 import React from "react";
 import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";

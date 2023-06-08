@@ -12,7 +12,7 @@ function Feedbackinfo({
   isDetailPage = false,
 }) {
   return isDetailPage ? (
-    <div className="order-1 md:order-2">
+    <li className="order-1 md:order-2 list-none">
       <div className="flex flex-col">
         <div className="flex gap-x-2 items-center">
           <img
@@ -48,10 +48,10 @@ function Feedbackinfo({
           <p className="text-sm text-blue-600 font-bold">{category}</p>
         </div>
       </div>
-    </div>
+    </li>
   ) : (
     <Link to={`/feedback/${id}`} className="order-1 md:order-2">
-      <div className="flex flex-col">
+      <li className="flex flex-col list-none">
         <div className="flex gap-x-2">
           <img
             className="h-[30px] w-[30px] rounded-full object-cover"
@@ -85,7 +85,7 @@ function Feedbackinfo({
         <div className="bg-blue-50  rounded-md py-1 px-4 h-[25px] w-fit flex items-center mt-2">
           <p className="text-sm text-blue-600 font-bold">{category}</p>
         </div>
-      </div>
+      </li>
     </Link>
   );
 }
