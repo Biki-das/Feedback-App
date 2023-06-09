@@ -1,12 +1,33 @@
-import { useState } from "react";
-import AddReply from "../Reply/AddReply";
+import { useState, useEffect } from "react";
+import ComposeReply from "../Reply/ComposeReply";
+import ReplyList from "../Reply/ReplyList";
+import { supabase } from "../../Supabase/Supabaseconfig";
 
-function Comment({ avatar, name, email, comment }) {
+function Comment({ avatar, name, email, comment, commentId, user }) {
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState(false);
+  const [replies, setReplies] = useState([]);
 
   const toggleReplyBox = () => {
     setIsReplyBoxVisible(!isReplyBoxVisible);
   };
+
+  function getReplies() {
+    supabase
+      .from("replies")
+      .select("*")
+      .eq("comment_id", commentId)
+      .then((result) => {
+        if (result.error) {
+          console.error("error fetching data");
+        } else {
+          setReplies(result.data);
+        }
+      });
+  }
+
+  useEffect(() => {
+    getReplies();
+  }, []);
 
   return (
     <div className="border-b-[0.8px] border-gray-30">
@@ -21,7 +42,7 @@ function Comment({ avatar, name, email, comment }) {
             <p className="text-gray-600 mt-6">{comment}</p>
           </div>
         </div>
-        {!isReplyBoxVisible && (
+        {user && !isReplyBoxVisible && (
           <button
             className="text-blue-600 font-bold cursor-pointer"
             onClick={toggleReplyBox}
@@ -30,7 +51,14 @@ function Comment({ avatar, name, email, comment }) {
           </button>
         )}
       </div>
-      {isReplyBoxVisible && <AddReply toggleReplyBox={toggleReplyBox} />}
+      {isReplyBoxVisible && (
+        <ComposeReply
+          toggleReplyBox={toggleReplyBox}
+          commentId={commentId}
+          getReplies={getReplies}
+        />
+      )}
+      {replies.length > 0 && <ReplyList replies={replies} />}
     </div>
   );
 }

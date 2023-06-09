@@ -129,6 +129,7 @@ function AddComment({ maxChars, feedbackId }) {
       <CommentList
         feedbackComments={feedbackComments}
         commentListRef={commentListRef}
+        user={user}
       />
     </>
   );
