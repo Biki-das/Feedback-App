@@ -77,6 +77,7 @@ function FeedbackForm({ currentUser }) {
           creation_time: DateStamp(new Date()),
           username: currentUser.userName,
           user_avatar: currentUser.userAvatar,
+          status: "Planned",
         },
       ])
       .then(() => {

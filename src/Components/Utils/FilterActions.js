@@ -6,3 +6,9 @@ export const FilterActions = {
   Bug: (feedback) => feedback.category === "Bug",
   Feature: (feedback) => feedback.category === "Feature",
 };
+
+export const StatusFilter = {
+  Planned: (statusList) => statusList.status === "Planned",
+  InProgress: (statusList) => statusList.status === "Inprogress",
+  Live: (statusList) => statusList.status === "Live",
+};
