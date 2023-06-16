@@ -22,8 +22,11 @@ function Roadmap() {
     inProgress: [],
     live: [],
   });
-  const dragError = () =>
-    toast.error("You need to login \n to perform this open");
+  const dragError = () => {
+    toast.error("You need to login \n to perform this open", {
+      duration: 1000,
+    });
+  };
 
   useEffect(() => {
     getFeedback();
@@ -43,6 +46,10 @@ function Roadmap() {
       };
       setColumns(columnData);
     }
+
+    () => {
+      toast.remove();
+    };
   }, []);
 
   const onDragEnd = async (result) => {
@@ -156,7 +163,7 @@ function Roadmap() {
           <Loader />
         ) : (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex">
+            <div className="flex w-[90%] mx-auto">
               {Object.entries(columns).map(([columnId, column]) => {
                 return (
                   <div key={columnId} className="w-[33.33%]">

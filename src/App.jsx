@@ -10,6 +10,7 @@ import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";
 import ProtectedRoute from "./Components/Route/ProtectedRoute";
 import FeedbackDetail from "./Components/Feedback/FeedbackDetail";
+import { toast } from "react-hot-toast";
 
 function App() {
   return (
