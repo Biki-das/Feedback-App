@@ -20,11 +20,8 @@ function Roadmap() {
     inProgress: [],
     live: [],
   });
-  const dragError = () => {
-    toast.error("You need to login to \n perform this operation", {
-      duration: 2000,
-    });
-  };
+  const dragError = () =>
+    toast.error("you need to login \n to perform this open");
 
   useEffect(() => {
     getFeedback();
@@ -32,6 +29,7 @@ function Roadmap() {
       let { data } = await supabase
         .from("feedback")
         .select("*, upvotes(*),comments(*)");
+      console.log(data);
       setFeedbackList(data);
 
       const columnData = {
@@ -46,6 +44,11 @@ function Roadmap() {
   const onDragEnd = async (result) => {
     if (!result.destination) return;
     const { source, destination } = result;
+
+    if (!userId) {
+      dragError();
+      return;
+    }
 
     if (source.droppableId !== destination.droppableId) {
       const sourceColumnId = source.droppableId;
@@ -145,11 +148,7 @@ function Roadmap() {
         </button>
       </div>
       <div className="mt-8">
-        <DragDropContext
-          onDragEnd={() => {
-            userId ? onDragEnd() : dragError();
-          }}
-        >
+        <DragDropContext onDragEnd={onDragEnd}>
           <div className="flex">
             {Object.entries(columns).map(([columnId, column]) => {
               return (
