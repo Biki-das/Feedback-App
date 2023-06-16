@@ -26,7 +26,14 @@ function App() {
             </main>
           }
         />
-        <Route path="/roadmap" element={<Roadmap />} />
+        <Route
+          path="/roadmap"
+          element={
+            <Provider store={store}>
+              <Roadmap />
+            </Provider>
+          }
+        />
         <Route
           path="/signin"
           element={

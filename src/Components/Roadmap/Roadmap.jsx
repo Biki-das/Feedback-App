@@ -3,16 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { toast } from "react-hot-toast";
 import { supabase } from "../../Supabase/Supabaseconfig";
+import { useSelector } from "react-redux";
+import CommentInfo from "../Feedback/CommentInfo";
+import UpvoteButtonContainer from "../Feedback/UpvoteButtonContainer";
 
 function Roadmap() {
   const navigate = useNavigate();
   const [feedbackList, setFeedbackList] = useState(null);
+  const userId = useSelector((state) => {
+    return state.currentUser?.user;
+  });
   const [columns, setColumns] = useState({
     planned: [],
     inProgress: [],
     live: [],
   });
+  const dragError = () => {
+    toast.error("You need to login to \n perform this operation", {
+      duration: 2000,
+    });
+  };
 
   useEffect(() => {
     getFeedback();
@@ -108,8 +120,8 @@ function Roadmap() {
   }
 
   return (
-    <div className="w-[80%] mx-auto">
-      <div className=" bg-[#373F68] justify-between h-[100px] flex items-center rounded-lg mx-auto mt-6 p-4">
+    <div className="xl:w-[80%] mx-auto">
+      <div className="w-[90%] bg-[#373F68] justify-between h-[100px] flex items-center rounded-lg mx-auto mt-6 p-4">
         <div>
           <button
             className="flex items-center gap-x-2 text-white font-bold"
@@ -133,17 +145,21 @@ function Roadmap() {
         </button>
       </div>
       <div className="mt-8">
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext
+          onDragEnd={() => {
+            userId ? onDragEnd() : dragError();
+          }}
+        >
           <div className="flex">
             {Object.entries(columns).map(([columnId, column]) => {
               return (
                 <div key={columnId} className="w-[33.33%]">
                   <h3 className="text-lg font-bold text-center text-gray-600">
                     {columnId === "planned"
-                      ? "Planned"
+                      ? `Planned (${columns.planned.length})`
                       : columnId === "inProgress"
-                      ? "In Progress"
-                      : "Live"}
+                      ? `In Progress (${columns.inProgress.length})`
+                      : `Live (${columns.live.length})`}
                   </h3>
                   <Droppable droppableId={columnId}>
                     {(provided) => (
@@ -161,7 +177,7 @@ function Roadmap() {
                             >
                               {(provided) => (
                                 <li
-                                  className={`bg-white rounded-lg p-4 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
+                                  className={`bg-white w-full lg:w-[90%] mx-auto rounded-lg p-4 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
                                     feedback.status
                                   )}`}
                                   {...provided.draggableProps}
@@ -174,6 +190,54 @@ function Roadmap() {
                                   <p className="mt-2 text-gray-600">
                                     {feedback.description}
                                   </p>
+                                  <div className="bg-blue-50 rounded-md py-1 px-4 h-[25px] w-fit flex items-center mt-2">
+                                    <p className="text-sm text-blue-600 font-medium">
+                                      {feedback.category}
+                                    </p>
+                                  </div>
+                                  <div className="flex justify-between items-center">
+                                    <CommentInfo comments={feedback.comments} />
+                                    <UpvoteButtonContainer
+                                      feedbackId={feedback.id}
+                                      userId={userId}
+                                      upvotes={feedback.upvotes}
+                                    />
+                                  </div>
+                                  <div class="flex mb-5 -space-x-4 items-center">
+                                    {feedback.comments.map(
+                                      ({ authorAvatar }, index) => {
+                                        if (
+                                          feedback.comments.length > 2 &&
+                                          index === 1
+                                        ) {
+                                          const remainingCount =
+                                            feedback.comments.length - 2;
+                                          return (
+                                            <>
+                                              <img
+                                                class={`w-10 h-10 border-2  rounded-full ${getFeedbackCardstyles(
+                                                  feedback.status
+                                                )}`}
+                                                src={authorAvatar}
+                                                key={index}
+                                              />
+                                              <span class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800">{`+${remainingCount}`}</span>
+                                            </>
+                                          );
+                                        } else if (index < 2) {
+                                          return (
+                                            <img
+                                              class={`w-10 h-10 border-2 rounded-full ${getFeedbackCardstyles(
+                                                feedback.status
+                                              )}`}
+                                              src={authorAvatar}
+                                              key={index}
+                                            />
+                                          );
+                                        }
+                                      }
+                                    )}
+                                  </div>
                                 </li>
                               )}
                             </Draggable>
