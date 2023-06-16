@@ -163,7 +163,7 @@ function Roadmap() {
           <Loader />
         ) : (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex w-[90%] mx-auto">
+            <div className="flex xl:w-[90%] mx-auto">
               {Object.entries(columns).map(([columnId, column]) => {
                 return (
                   <div key={columnId} className="w-[33.33%]">
@@ -190,7 +190,7 @@ function Roadmap() {
                               >
                                 {(provided) => (
                                   <li
-                                    className={`bg-white w-full lg:w-[90%] mx-auto rounded-lg p-4 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
+                                    className={`bg-white w-full  mx-auto rounded-lg p-4 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
                                       feedback.status
                                     )}`}
                                     {...provided.draggableProps}
