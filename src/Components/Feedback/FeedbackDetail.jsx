@@ -39,7 +39,7 @@ function FeedbackDetail({ currentUser }) {
           <MdOutlineArrowBackIos color="blue" />
           <span>Go back</span>
         </button>
-        {feedbackDetail?.user_id === currentUser.user.id && (
+        {feedbackDetail?.user_id === currentUser.user?.id && (
           <Link to={`/feedback/edit/${id}`}>
             <button className="disabled:opacity-70 bg-purple-600 text-white items-center font-bold p-2 w-[150px] h-[40px] justify-center rounded-md cursor-pointer hover:bg-purple-400 transition-[background] duration-[0.3s] text-sm">
               Edit Feedback
