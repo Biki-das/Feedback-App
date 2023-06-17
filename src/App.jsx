@@ -10,7 +10,7 @@ import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";
 import ProtectedRoute from "./Components/Route/ProtectedRoute";
 import FeedbackDetail from "./Components/Feedback/FeedbackDetail";
-import { toast } from "react-hot-toast";
+import FeedbackEdit from "./Components/Feedback/FeedbackEdit";
 
 function App() {
   return (
@@ -56,6 +56,14 @@ function App() {
           element={
             <Provider store={store}>
               <FeedbackDetail />
+            </Provider>
+          }
+        />
+        <Route
+          path="/feedback/edit/:id"
+          element={
+            <Provider store={store}>
+              <FeedbackEdit />
             </Provider>
           }
         />

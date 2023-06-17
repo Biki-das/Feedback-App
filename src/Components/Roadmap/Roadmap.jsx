@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import CommentInfo from "../Feedback/CommentInfo";
 import UpvoteButtonContainer from "../Feedback/UpvoteButtonContainer";
 import { Loader } from "../Utils/Loader";
+import { Link } from "react-router-dom";
 
 function Roadmap() {
   const navigate = useNavigate();
@@ -224,35 +225,37 @@ function Roadmap() {
                                 >
                                   {(provided) => (
                                     <li
-                                      className={`bg-white w-full min-h-[200px] relative mx-auto rounded-lg p-6 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
+                                      className={`bg-white  w-full min-h-[200px] relative mx-auto rounded-lg p-6 mb-4 shadow-md border-t-8 ${getFeedbackCardstyles(
                                         feedback.status
                                       )}`}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
                                       ref={provided.innerRef}
                                     >
-                                      <h4 className="font-bold">
-                                        {feedback.title}
-                                      </h4>
-                                      <p className="mt-2 text-gray-600">
-                                        {isDesktop
-                                          ? feedback.description
-                                          : feedback.description.substring(
-                                              0,
-                                              80
-                                            ) + "......"}
-                                      </p>
+                                      <Link to={`/feedback/${feedback.id}`}>
+                                        <h4 className="font-bold">
+                                          {feedback.title}
+                                        </h4>
+                                        <p className="mt-2 text-gray-600">
+                                          {isDesktop
+                                            ? feedback.description
+                                            : feedback.description.substring(
+                                                0,
+                                                80
+                                              ) + "......"}
+                                        </p>
 
-                                      <div className="flex flex-row-reverse justify-between items-center mt-2">
-                                        <CommentInfo
-                                          comments={feedback.comments}
-                                        />
-                                        <div className="bg-blue-50 rounded-md py-1 px-4 h-[25px] w-fit flex items-center">
-                                          <p className="text-sm text-blue-600 font-medium">
-                                            {feedback.category}
-                                          </p>
+                                        <div className="flex flex-row-reverse justify-between items-center mt-2">
+                                          <CommentInfo
+                                            comments={feedback.comments}
+                                          />
+                                          <div className="bg-blue-50 rounded-md py-1 px-4 h-[25px] w-fit flex items-center">
+                                            <p className="text-sm text-blue-600 font-medium">
+                                              {feedback.category}
+                                            </p>
+                                          </div>
                                         </div>
-                                      </div>
+                                      </Link>
                                       <div className="relative top-4">
                                         <UpvoteButtonContainer
                                           feedbackId={feedback.id}
