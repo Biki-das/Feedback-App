@@ -4,7 +4,6 @@ import { FaPenNib } from "react-icons/fa";
 import { BsCheck } from "react-icons/bs";
 import * as Select from "@radix-ui/react-select";
 import { forwardRef, useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { supabase } from "../../Supabase/Supabaseconfig";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -40,7 +39,6 @@ function FeedbackEdit() {
       setTitle(feedbackData.title);
       setFeedbackStatus(feedbackData.status);
 
-      // Store initial values
       setInitialSelectedCategory(feedbackData.category);
       setInitialDescription(feedbackData.description);
       setInitialTitle(feedbackData.title);

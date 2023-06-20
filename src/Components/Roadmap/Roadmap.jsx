@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -10,6 +10,7 @@ import CommentInfo from "../Feedback/CommentInfo";
 import UpvoteButtonContainer from "../Feedback/UpvoteButtonContainer";
 import { Loader } from "../Utils/Loader";
 import { Link } from "react-router-dom";
+import { Tab } from "@headlessui/react";
 
 function Roadmap() {
   const navigate = useNavigate();
@@ -168,8 +169,8 @@ function Roadmap() {
   }
 
   return (
-    <div className="xl:w-[80%] mx-auto">
-      <div className="w-[90%] bg-[#373F68] justify-between h-[100px] flex items-center rounded-lg mx-auto mt-6 p-4">
+    <div className="w-full md:w-[80%] mx-auto">
+      <div className="w-full md:w-[90%] bg-[#373F68] justify-between h-[100px] flex items-center md:rounded-lg mx-auto md:mt-6 p-4">
         <div>
           <button
             className="flex items-center gap-x-2 text-white font-bold"
@@ -192,7 +193,7 @@ function Roadmap() {
           Add Feedback
         </button>
       </div>
-      {isTablet && (
+      {isTablet ? (
         <div className="mt-8">
           {loading ? (
             <Loader />
@@ -204,10 +205,10 @@ function Roadmap() {
                     <div key={columnId} className="w-[33.33%]">
                       <h3 className="text-lg font-bold text-center text-gray-600">
                         {columnId === "planned"
-                          ? `Planned (${columns.planned.length})`
+                          ? `Planned (${column.length})`
                           : columnId === "inProgress"
-                          ? `In Progress (${columns.inProgress.length})`
-                          : `Live (${columns.live.length})`}
+                          ? `In Progress (${column.length})`
+                          : `Live (${column.length})`}
                       </h3>
                       <Droppable droppableId={columnId}>
                         {(provided) => (
@@ -314,7 +315,154 @@ function Roadmap() {
             </DragDropContext>
           )}
         </div>
+      ) : (
+        <MyTabs columns={columns} userId={userId} />
       )}
+    </div>
+  );
+}
+
+function MyTabs({ columns, userId }) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
+  return (
+    <div className="w-full mx-auto max-w-md sm:px-0">
+      <Tab.Group
+        defaultIndex={0}
+        selectedIndex={selectedIndex}
+        onChange={setSelectedIndex}
+      >
+        <Tab.List className="flex space-x-1 p-1">
+          {Object.keys(columns).map((columnId) => (
+            <Tab
+              key={columnId}
+              className={({ selected }) =>
+                classNames(
+                  "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-gray-600",
+                  `ring-white ring-opacity-60 ring-offset-2
+                  focus:outline-none focus:ring-2`,
+                  selected
+                    ? `${selectedIndex === 0 && `border-2 border-orange-400`} ${
+                        selectedIndex === 1 && `border-2 border-purple-400`
+                      }
+                      ${selectedIndex === 2 && `border-2 border-cyan-400`}
+                      `
+                    : "opacity-80"
+                )
+              }
+            >
+              {columnId === "planned"
+                ? `Planned (${columns[columnId].length})`
+                : columnId === "inProgress"
+                ? `In Progress (${columns[columnId].length})`
+                : `Live (${columns[columnId].length})`}
+            </Tab>
+          ))}
+        </Tab.List>
+        <Tab.Panels className="mt-2">
+          {Object.keys(columns).map((columnId, idx) => (
+            <Tab.Panel
+              key={idx}
+              className={classNames(
+                "rounded-xl bg-white p-3",
+                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+              )}
+            >
+              <ul>
+                {columns[columnId].map((feedback) => (
+                  <li
+                    key={feedback.id}
+                    className={`bg-white w-full min-h-[200px] relative mx-auto rounded-lg p-6 mb-4 shadow-md border-t-8 ${
+                      feedback.status === "Planned"
+                        ? "border-orange-400"
+                        : feedback.status === "Inprogress"
+                        ? "border-purple-400"
+                        : "border-cyan-400"
+                    }`}
+                  >
+                    <Link to={`/feedback/${feedback.id}`}>
+                      <h4 className="font-bold">{feedback.title}</h4>
+                      <p className="mt-2 text-gray-600">
+                        {feedback.description}
+                      </p>
+
+                      <div className="flex flex-row-reverse justify-between items-center mt-2">
+                        <CommentInfo comments={feedback.comments} />
+                        <div className="bg-blue-50 rounded-md py-1 px-4 h-[25px] w-fit flex items-center">
+                          <p className="text-sm text-blue-600 font-medium">
+                            {feedback.category}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="relative top-4">
+                      <UpvoteButtonContainer
+                        feedbackId={feedback.id}
+                        userId={userId}
+                        upvotes={feedback.upvotes}
+                      />
+                    </div>
+                    <div className="flex bottom-2 -space-x-4 items-center absolute right-2">
+                      {feedback.comments.map(({ authorAvatar }, index) => {
+                        if (feedback.comments.length > 2 && index === 1) {
+                          const remainingCount = feedback.comments.length - 2;
+                          return (
+                            <>
+                              <img
+                                className={`${"w-[35px] h-[35px]"} border-2 rounded-full ${
+                                  feedback.status === "Planned"
+                                    ? "border-orange-200"
+                                    : feedback.status === "Inprogress"
+                                    ? "border-purple-200"
+                                    : "border-cyan-200"
+                                }`}
+                                src={authorAvatar}
+                                alt={`Comment ${index + 1}`}
+                              />
+                              <div
+                                className={`bg-white w-[35px] h-[35px] rounded-full ${
+                                  feedback.status === "Planned"
+                                    ? "border-orange-400"
+                                    : feedback.status === "Inprogress"
+                                    ? "border-purple-400"
+                                    : "border-cyan-400"
+                                } flex justify-center items-center`}
+                              >
+                                <p className="text-xs font-semibold text-gray-500">
+                                  +{remainingCount}
+                                </p>
+                              </div>
+                            </>
+                          );
+                        } else if (index < 2) {
+                          return (
+                            <img
+                              key={index}
+                              className={`${"w-[35px] h-[35px]"} border-2 rounded-full ${
+                                feedback.status === "Planned"
+                                  ? "border-orange-200"
+                                  : feedback.status === "Inprogress"
+                                  ? "border-purple-200"
+                                  : "border-cyan-200"
+                              }`}
+                              src={authorAvatar}
+                              alt={`Comment ${index + 1}`}
+                            />
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
     </div>
   );
 }
