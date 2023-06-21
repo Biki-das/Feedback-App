@@ -169,7 +169,7 @@ function Roadmap() {
   }
 
   return (
-    <div className="w-full md:w-[80%] mx-auto">
+    <div className="w-full lg:w-[80%] mx-auto">
       <div className="w-full md:w-[90%] bg-[#373F68] justify-between h-[100px] flex items-center md:rounded-lg mx-auto md:mt-6 p-4">
         <div>
           <button
