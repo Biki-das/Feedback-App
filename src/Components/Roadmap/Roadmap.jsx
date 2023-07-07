@@ -193,7 +193,9 @@ function Roadmap() {
           Add Feedback
         </button>
       </div>
-      {isTablet ? (
+      {loading ? (
+        <Loader />
+      ) : isTablet ? (
         <div className="mt-8">
           {loading ? (
             <Loader />
