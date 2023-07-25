@@ -26,9 +26,11 @@ function FeedbackList({ options, filters, currentUser }) {
 
   useEffect(() => {
     document.title = `${
-      feedbacks.filter(FilterActions[filters]).sort(actions[options]).length
-    } Suggestions`;
-  }, [filters]);
+      loading
+        ? "Loading..." // or some default title while loading
+        : feedbacks.filter(FilterActions[filters]).sort(actions[options]).length
+    } Suggestions Feedback Board`;
+  }, [loading, filters, options]);
 
   return (
     <div className="lg:absolute static lg:w-8/12 lg:right-0 md:mt-8 lg:mt-auto animate-slideright">
