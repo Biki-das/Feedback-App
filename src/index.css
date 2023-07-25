@@ -80,9 +80,11 @@
   .TabsTrigger:hover {
     color: var(--violet11);
   }
-  .TabsTrigger[data-state="active"] {
-    color: purple;
+  .TabsTrigger {
     font-weight: bold;
+  }
+  .TabsTrigger[data-state="active"] {
+    color: #9333ea;
     transition: box-shadow 0.3s ease-in-out;
   }
   .TabsTrigger:focus {
