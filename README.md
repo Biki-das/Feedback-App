@@ -1,6 +1,6 @@
 # Feedback App for GitHub
 
-![Feedback App Logo](vite-project\src\assets\Feedbackfavicon.png)
+![Feedback App Logo](https://img.icons8.com/?size=512&id=zIKcpVIKdvP1&format=png)
 
 Introducing the Feedback App: Your centralized platform for streamlined and collaborative product discussions. Seamlessly participate in direct and focused conversations, empowering members with real-time engagement and valuable insights.
 
