@@ -9,5 +9,5 @@ export function DateStamp(date) {
 
 export function formatFeedbackDate(date) {
   const splittedDate = date.split("-").join();
-  return format(new Date(splittedDate), "dd MMM, yy");
+  return format(new Date(parseInt(splittedDate)), "dd MMM, yy");
 }
