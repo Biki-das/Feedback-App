@@ -16,18 +16,13 @@ function TabsDemo({ setUser }) {
   );
 
   React.useEffect(() => {
-    getAvatar();
+    getRandomAvatar();
   }, [location.pathname]);
 
-  async function getAvatar() {
-    const cacheBuster = Date.now();
-    const res = await fetch(
-      `https://avatars.dicebear.com/api/avataaars/male/${
-        Math.random() * 2
-      }.svg?cache=${cacheBuster}`
-    );
-    const data = await res.url;
-    setAvatarUrl(data);
+  function getRandomAvatar() {
+    const randomSeed = Math.random().toString(36).substring(7);
+    const apiUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`;
+    setAvatarUrl(apiUrl);
   }
 
   return (
