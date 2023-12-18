@@ -8,6 +8,14 @@ export function DateStamp(date) {
 }
 
 export function formatFeedbackDate(date) {
-  const splittedDate = date.split("-").join();
-  return format(new Date(splittedDate), "dd MMM, yy");
+  const dateParts = date.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (dateParts) {
+    const year = parseInt(dateParts[1]);
+    const month = parseInt(dateParts[2]) - 1; // Months are zero-based (0-11)
+    const day = parseInt(dateParts[3]);
+    const formattedDate = format(new Date(year, month, day), "dd MMM, yy");
+    return formattedDate;
+  } else {
+    return "Invalid date";
+  }
 }
