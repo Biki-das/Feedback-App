@@ -3,7 +3,18 @@ import { TbLogin } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Logout from "../Auth/Logout";
 
-function SideBarCard({ currentUser }) {
+interface SideBarCardProps {
+  currentUser: {
+    user: {
+      email?: string;
+      id?: string;
+      userAvatar?: string;
+      userName?: string;
+    };
+  };
+}
+
+function SideBarCard({ currentUser }: SideBarCardProps) {
   const [showLogOut, setShowLogOut] = React.useState(false);
 
   return (

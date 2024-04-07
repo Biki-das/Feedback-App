@@ -8,19 +8,32 @@ import { setUser, clearUser } from "../../Redux/User/action";
 import { connect } from "react-redux";
 import { supabase } from "../../Supabase/Supabaseconfig";
 
-function SideBar({ setUser, currentUser, clearUser }) {
+interface SideBarProps {
+  setUser: typeof setUser;
+  currentUser: {
+    user: {
+      email?: string;
+      id?: string;
+      userAvatar?: string;
+      userName?: string;
+    };
+  };
+  clearUser: typeof clearUser;
+}
+
+function SideBar({ setUser, currentUser, clearUser }: SideBarProps) {
   const [showSideBar, setShowSideBar] = React.useState(false);
 
   React.useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" || "INITIAL_SESSION") {
         const user = session?.user;
-        if (user) {
+        if (user !== undefined) {
           setUser({
-            email: user.email,
-            id: user.id,
-            userAvatar: user.user_metadata.userAvatar,
-            userName: user.user_metadata.userName,
+            email: user?.email,
+            id: user?.id,
+            userAvatar: user?.user_metadata.userAvatar,
+            userName: user?.user_metadata.userName,
           });
         }
       }
@@ -50,7 +63,7 @@ function SideBar({ setUser, currentUser, clearUser }) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: { currentUser: SideBarProps["currentUser"] }) {
   return {
     currentUser: state.currentUser,
   };

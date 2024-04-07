@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { supabase } from "../../Supabase/Supabaseconfig";
 
-function SignUp({ avatarUrl, setUser }) {
+interface SignUpProps {
+  avatarUrl: string;
+}
+
+function SignUp({ avatarUrl }: SignUpProps) {
   const [fullName, setFullName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -28,15 +32,16 @@ function SignUp({ avatarUrl, setUser }) {
     } else {
       successNotify();
       setTimeout(() => {
-        const id = data.user.id;
-        const email = data.user.email;
+        const id = data.user?.id;
+        const email = data.user?.email;
         insertUser(id, email);
-        navigate("/", toast.remove());
+        toast.remove();
+        navigate("/");
       }, 1000);
     }
   }
 
-  async function insertUser(id, email) {
+  async function insertUser(id: string | undefined, email: string | undefined) {
     const { data, error } = await supabase.from("users").insert([
       {
         id: id,

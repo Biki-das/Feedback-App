@@ -4,18 +4,31 @@ import { connect } from "react-redux";
 import { updateFilter } from "../../Redux/Filter/action";
 import { Link } from "react-router-dom";
 import { supabase } from "../../Supabase/Supabaseconfig";
+import { Dispatch } from "redux";
 
-function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
+interface MobilesidebarProps {
+  updateFilter: typeof updateFilter;
+  hideSidebar: (value: boolean) => void;
+  currentFilter: string;
+}
+
+function Mobilesidebar({
+  updateFilter,
+  hideSidebar,
+  currentFilter,
+}: MobilesidebarProps) {
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
-  const [statusList, setStatusList] = useState([]);
-  const plannedList = statusList.filter(({ status }) => {
+  const [statusList, setStatusList] = useState<{ status: string }[] | null>(
+    null
+  );
+  const plannedList = statusList?.filter(({ status }) => {
     return status === "Planned";
   });
-  const inProgressList = statusList.filter(({ status }) => {
+  const inProgressList = statusList?.filter(({ status }) => {
     return status === "Inprogress";
   });
 
-  const liveList = statusList.filter(({ status }) => {
+  const liveList = statusList?.filter(({ status }) => {
     return status === "Live";
   });
 
@@ -40,7 +53,11 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                     currentFilter === tags ? "bg-blue-700 text-white" : ""
                   }`}
                   onClick={(e) => {
-                    updateFilter(e.target.textContent), hideSidebar(false);
+                    let value = e.target as HTMLElement;
+                    if (value.textContent === null) {
+                      throw new Error("event is null");
+                    }
+                    updateFilter(value.textContent), hideSidebar(false);
                   }}
                 >
                   {tags}
@@ -62,7 +79,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-orange-400 rounded-full"></div>
                   <p>Planned</p>
                 </div>
-                <p className="font-bold">{plannedList.length}</p>
+                <p className="font-bold">{plannedList?.length}</p>
               </div>
 
               <div className="flex w-full justify-between mt-2">
@@ -70,7 +87,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-purple-400 rounded-full"></div>
                   <p>In Progress</p>
                 </div>
-                <p className="font-bold">{inProgressList.length}</p>
+                <p className="font-bold">{inProgressList?.length}</p>
               </div>
 
               <div className="flex w-full justify-between mt-2">
@@ -78,7 +95,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-cyan-400 rounded-full"></div>
                   <p>Live</p>
                 </div>
-                <p className="font-bold">{liveList.length}</p>
+                <p className="font-bold">{liveList?.length}</p>
               </div>
             </div>
           </div>
@@ -88,15 +105,15 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: { filter: string }) {
   return {
     currentFilter: state.filter,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    updateFilter: (filter) => dispatch(updateFilter(filter)),
+    updateFilter: (filter: string) => dispatch(updateFilter(filter)),
   };
 }
 

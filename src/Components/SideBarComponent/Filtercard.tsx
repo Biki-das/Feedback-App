@@ -1,7 +1,12 @@
 import { connect } from "react-redux";
 import { updateFilter } from "../../Redux/Filter/action";
 
-function Filtercard({ updateFilter, currentFilter }) {
+interface FiltercardProps {
+  updateFilter: typeof updateFilter;
+  currentFilter: string;
+}
+
+function Filtercard({ updateFilter, currentFilter }: FiltercardProps) {
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
 
   return (
@@ -14,7 +19,11 @@ function Filtercard({ updateFilter, currentFilter }) {
               currentFilter === tag ? "bg-blue-700 text-white" : ""
             }`}
             onClick={(e) => {
-              updateFilter(e.target.textContent);
+              const event = e.target as HTMLElement;
+              if (event.textContent === null) {
+                throw new Error("event is null");
+              }
+              updateFilter(event.textContent);
             }}
           >
             {tag}
@@ -25,7 +34,7 @@ function Filtercard({ updateFilter, currentFilter }) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: { filter: string }) {
   return {
     currentFilter: state.filter,
   };

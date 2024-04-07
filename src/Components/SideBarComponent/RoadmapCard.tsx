@@ -4,7 +4,7 @@ import { supabase } from "../../Supabase/Supabaseconfig";
 import { StatusFilter } from "../Utils/FilterActions";
 
 function RoadmapCard() {
-  const [statusList, setStatusList] = useState([]);
+  const [statusList, setStatusList] = useState<{ status: string }[] | null>([]);
 
   useEffect(() => {
     getFeedback();
@@ -28,7 +28,7 @@ function RoadmapCard() {
           <p>Planned</p>
         </div>
         <p className="font-bold">
-          {statusList.filter(StatusFilter.Planned).length}
+          {statusList?.filter(StatusFilter.Planned).length}
         </p>
       </div>
 
@@ -38,7 +38,7 @@ function RoadmapCard() {
           <p>In Progress</p>
         </div>
         <p className="font-bold">
-          {statusList.filter(StatusFilter.InProgress).length}
+          {statusList?.filter(StatusFilter.InProgress).length}
         </p>
       </div>
 
@@ -48,7 +48,7 @@ function RoadmapCard() {
           <p>Live</p>
         </div>
         <p className="font-bold">
-          {statusList.filter(StatusFilter.Live).length}
+          {statusList?.filter(StatusFilter.Live).length}
         </p>
       </div>
     </div>
