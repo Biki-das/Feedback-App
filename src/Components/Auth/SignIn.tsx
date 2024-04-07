@@ -12,7 +12,7 @@ function SignIn() {
 
   async function logIn() {
     try {
-      const { user, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
@@ -22,7 +22,8 @@ function SignIn() {
       } else {
         successNotify();
         setTimeout(() => {
-          navigate("/", toast.remove());
+          toast.remove();
+          navigate("/");
         }, 1000);
       }
     } catch (error) {

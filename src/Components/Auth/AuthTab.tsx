@@ -8,9 +8,13 @@ import { connect } from "react-redux";
 import { setUser } from "../../Redux/User/action";
 import { motion } from "framer-motion";
 
-function TabsDemo({ setUser }) {
+interface TabsDemoProps {
+  setUser: typeof setUser;
+}
+
+function TabsDemo({ setUser }: TabsDemoProps) {
   const location = useLocation();
-  const [avatarUrl, setAvatarUrl] = React.useState(null);
+  const [avatarUrl, setAvatarUrl] = React.useState<string>("");
   const [activeTab, setActiveTab] = React.useState(
     location.pathname.slice(1) || "signin"
   );
@@ -61,14 +65,14 @@ function TabsDemo({ setUser }) {
           <SignIn />
         </Tabs.Content>
         <Tabs.Content className="TabsContent" value="signup">
-          <SignUp avatarUrl={avatarUrl} setUser={setUser} />
+          <SignUp avatarUrl={avatarUrl} />
         </Tabs.Content>
       </Tabs.Root>
     </RemoveScroll>
   );
 }
 
-function AuthTab({ setUser }) {
+function AuthTab({ setUser }: TabsDemoProps) {
   return <TabsDemo setUser={setUser} />;
 }
 
