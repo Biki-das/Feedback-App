@@ -1,13 +1,13 @@
 import { format } from "date-fns";
 
-export function DateStamp(date) {
+export function DateStamp(date: Date) {
   const dateString = `${date.getFullYear()}-${(date.getMonth() + 1)
     .toString()
     .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
   return dateString;
 }
 
-export function formatFeedbackDate(date) {
+export function formatFeedbackDate(date: string) {
   const dateParts = date.match(/(\d{4})-(\d{2})-(\d{2})/);
   if (dateParts) {
     const year = parseInt(dateParts[1]);

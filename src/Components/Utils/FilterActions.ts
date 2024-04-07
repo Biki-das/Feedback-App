@@ -1,16 +1,29 @@
-export const FilterActions = {
+interface FilterActions {
+  All: () => boolean;
+  UI: (feedback: any) => boolean;
+  UX: (feedback: any) => boolean;
+  Enhancement: (feedback: any) => boolean;
+  Bug: (feedback: any) => boolean;
+  Feature: (feedback: any) => boolean;
+}
+
+interface StatusFilter {
+  Planned: (statusList: any) => boolean;
+  InProgress: (statusList: any) => boolean;
+  Live: (statusList: any) => boolean;
+}
+
+export const FilterActions: FilterActions = {
   All: () => true,
-  UI: (feedback: { category: string }) => feedback.category === "UI",
-  UX: (feedback: { category: string }) => feedback.category === "UX",
-  Enhancement: (feedback: { category: string }) =>
-    feedback.category === "Enhancement",
-  Bug: (feedback: { category: string }) => feedback.category === "Bug",
-  Feature: (feedback: { category: string }) => feedback.category === "Feature",
+  UI: (feedback) => feedback.category === "UI",
+  UX: (feedback) => feedback.category === "UX",
+  Enhancement: (feedback) => feedback.category === "Enhancement",
+  Bug: (feedback) => feedback.category === "Bug",
+  Feature: (feedback) => feedback.category === "Feature",
 };
 
-export const StatusFilter = {
-  Planned: (statusList: { status: string }) => statusList.status === "Planned",
-  InProgress: (statusList: { status: string }) =>
-    statusList.status === "Inprogress",
-  Live: (statusList: { status: string }) => statusList.status === "Live",
+export const StatusFilte: StatusFilter = {
+  Planned: (statusList) => statusList.status === "Planned",
+  InProgress: (statusList) => statusList.status === "Inprogress",
+  Live: (statusList) => statusList.status === "Live",
 };
