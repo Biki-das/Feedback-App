@@ -5,25 +5,24 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { RemoveScroll } from "react-remove-scroll";
 import { connect } from "react-redux";
-import { setUser } from "../Store/User/action";
+import { setUser } from "../../Redux/User/action";
+import { motion } from "framer-motion";
 
 function TabsDemo({ setUser }) {
   const location = useLocation();
   const [avatarUrl, setAvatarUrl] = React.useState(null);
+  const [activeTab, setActiveTab] = React.useState(
+    location.pathname.slice(1) || "signin"
+  );
 
   React.useEffect(() => {
-    getAvatar();
+    getRandomAvatar();
   }, [location.pathname]);
 
-  async function getAvatar() {
-    const cacheBuster = Date.now();
-    const res = await fetch(
-      `https://avatars.dicebear.com/api/avataaars/male/${
-        Math.random() * 2
-      }.svg?cache=${cacheBuster}`
-    );
-    const data = await res.url;
-    setAvatarUrl(data);
+  function getRandomAvatar() {
+    const randomSeed = Math.random().toString(36).substring(7);
+    const apiUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`;
+    setAvatarUrl(apiUrl);
   }
 
   return (
@@ -31,6 +30,7 @@ function TabsDemo({ setUser }) {
       <Tabs.Root
         className="TabsRoot"
         defaultValue={location.pathname.slice(1) || "one"}
+        onValueChange={(value) => setActiveTab(value)}
       >
         <div className="bg-white h-[200px] flex justify-center items-center">
           <img src={avatarUrl} className="h-[80px] rounded-full" />
@@ -46,6 +46,16 @@ function TabsDemo({ setUser }) {
               Signup
             </Link>
           </Tabs.Trigger>
+          <motion.div
+            initial={false}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 30,
+            }}
+            animate={{ x: activeTab === "signin" ? "0%" : "100%" }}
+            className="w-[50%] bottom-0 translate-x-[100%] left-0 bg-purple-600 h-[10%] absolute"
+          ></motion.div>
         </Tabs.List>
         <Tabs.Content className="TabsContent mt-3" value="signin">
           <SignIn />

@@ -4,7 +4,10 @@ const initialState = {
   user: null,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (
+  state = initialState,
+  action: { type: "SET_USER"; payload: string }
+) => {
   if (action.type === SET_USER) {
     return {
       ...state,

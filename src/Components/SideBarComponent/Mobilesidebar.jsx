@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RemoveScroll } from "react-remove-scroll";
 import { connect } from "react-redux";
-import { updateFilter } from "../Store/Filter/action";
+import { updateFilter } from "../../Redux/Filter/action";
 import { Link } from "react-router-dom";
+import { supabase } from "../../Supabase/Supabaseconfig";
 
 function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
+  const [statusList, setStatusList] = useState([]);
+  const plannedList = statusList.filter(({ status }) => {
+    return status === "Planned";
+  });
+  const inProgressList = statusList.filter(({ status }) => {
+    return status === "Inprogress";
+  });
+
+  const liveList = statusList.filter(({ status }) => {
+    return status === "Live";
+  });
+
+  useEffect(() => {
+    getFeedback();
+    async function getFeedback() {
+      let { data } = await supabase.from("feedback").select("status");
+      setStatusList(data);
+    }
+  }, []);
 
   return (
     <div className="bg-white w-full h-full absolute z-50 top-[70px] bg-opacity-50 md:hidden animate-slideright">
@@ -42,7 +62,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-orange-400 rounded-full"></div>
                   <p>Planned</p>
                 </div>
-                <p className="font-bold">12</p>
+                <p className="font-bold">{plannedList.length}</p>
               </div>
 
               <div className="flex w-full justify-between mt-2">
@@ -50,7 +70,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-purple-400 rounded-full"></div>
                   <p>In Progress</p>
                 </div>
-                <p className="font-bold">12</p>
+                <p className="font-bold">{inProgressList.length}</p>
               </div>
 
               <div className="flex w-full justify-between mt-2">
@@ -58,7 +78,7 @@ function Mobilesidebar({ updateFilter, hideSidebar, currentFilter }) {
                   <div className="h-[8px] w-[8px] bg-cyan-400 rounded-full"></div>
                   <p>Live</p>
                 </div>
-                <p className="font-bold">12</p>
+                <p className="font-bold">{liveList.length}</p>
               </div>
             </div>
           </div>

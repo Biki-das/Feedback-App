@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import Feedbackinfo from "./Feedbackinfo";
 import UpvoteButtonContainer from "./UpvoteButtonContainer";
@@ -28,16 +28,25 @@ function FeedbackDetail({ currentUser }) {
   }, []);
   return (
     <main className="w-[90%] lg:w-[40%] mx-auto">
-      <button
-        className="flex items-center gap-x-4 text-gray-600 font-bold mt-8"
-        onClick={() => {
-          navigate(-1);
-          toast.remove();
-        }}
-      >
-        <MdOutlineArrowBackIos color="blue" />
-        <span>Go back</span>
-      </button>
+      <div className="flex justify-between items-center mt-8">
+        <button
+          className="flex items-center gap-x-4 text-gray-600 font-bold"
+          onClick={() => {
+            navigate(-1);
+            toast.remove();
+          }}
+        >
+          <MdOutlineArrowBackIos color="blue" />
+          <span>Go back</span>
+        </button>
+        {feedbackDetail?.user_id === currentUser.user?.id && (
+          <Link to={`/feedback/edit/${id}`}>
+            <button className="disabled:opacity-70 bg-purple-600 text-white items-center font-bold p-2 w-[150px] h-[40px] justify-center rounded-md cursor-pointer hover:bg-purple-400 transition-[background] duration-[0.3s] text-sm">
+              Edit Feedback
+            </button>
+          </Link>
+        )}
+      </div>
       {loading ? (
         <Loader />
       ) : (

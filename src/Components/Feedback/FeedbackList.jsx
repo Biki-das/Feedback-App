@@ -5,7 +5,7 @@ import Feedback from "./Feedback";
 import { actions } from "../Utils/SortActions";
 import { FilterActions } from "../Utils/FilterActions";
 import { connect } from "react-redux";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import { Loader } from "../Utils/Loader";
 
 function FeedbackList({ options, filters, currentUser }) {
@@ -23,6 +23,14 @@ function FeedbackList({ options, filters, currentUser }) {
       setFeedback(data);
     }
   }, []);
+
+  useEffect(() => {
+    document.title = `${
+      loading
+        ? "Loading..." // or some default title while loading
+        : feedbacks.filter(FilterActions[filters]).sort(actions[options]).length
+    } Suggestions Feedback Board`;
+  }, [loading, filters, options]);
 
   return (
     <div className="lg:absolute static lg:w-8/12 lg:right-0 md:mt-8 lg:mt-auto animate-slideright">

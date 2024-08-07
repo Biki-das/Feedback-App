@@ -1,15 +1,16 @@
 import "./App.css";
 import SideBar from "./Components/SideBarComponent/SideBar";
 import Feedback from "./Components/Feedback/FeedbackList";
-import Roadmap from "./Components/Roadmap";
+import Roadmap from "./Components/Roadmap/Roadmap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./Components/Store";
+import { store } from "./Redux";
 import React from "react";
 import AuthTab from "./Components/Auth/AuthTab";
 import FeedbackForm from "./Components/Feedback/FeedbackForm";
 import ProtectedRoute from "./Components/Route/ProtectedRoute";
 import FeedbackDetail from "./Components/Feedback/FeedbackDetail";
+import FeedbackEdit from "./Components/Feedback/FeedbackEdit";
 
 function App() {
   return (
@@ -26,7 +27,14 @@ function App() {
             </main>
           }
         />
-        <Route path="/roadmap" element={<Roadmap />} />
+        <Route
+          path="/roadmap"
+          element={
+            <Provider store={store}>
+              <Roadmap />
+            </Provider>
+          }
+        />
         <Route
           path="/signin"
           element={
@@ -48,6 +56,14 @@ function App() {
           element={
             <Provider store={store}>
               <FeedbackDetail />
+            </Provider>
+          }
+        />
+        <Route
+          path="/feedback/edit/:id"
+          element={
+            <Provider store={store}>
+              <FeedbackEdit />
             </Provider>
           }
         />

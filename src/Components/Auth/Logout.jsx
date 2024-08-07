@@ -1,6 +1,6 @@
 import { HiOutlineLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 
 function Logout() {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
-import Comment from "./AddComment";
+import AddComment from "./AddComment";
 
 function ComposeComment({ feedbackId, feedbackComments }) {
   return (
-    <Comment
+    <AddComment
       maxChars={250}
       feedbackId={feedbackId}
       feedbackComments={feedbackComments}

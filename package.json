@@ -18,8 +18,10 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.1.4",
     "feather-icons-react": "^0.6.2",
+    "framer-motion": "^10.13.1",
     "prettier": "^2.8.7",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-focus-lock": "^2.9.4",
@@ -29,6 +31,7 @@
     "react-remove-scroll": "^2.5.5",
     "react-router-dom": "^6.9.0",
     "redux": "^4.2.1",
+    "typescript": "^5.4.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

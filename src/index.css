@@ -54,6 +54,7 @@
     border-bottom: 1px solid var(--mauve6);
     width: 90%;
     margin: 0 auto;
+    position: relative;
   }
 
   .TabsTrigger {
@@ -79,10 +80,11 @@
   .TabsTrigger:hover {
     color: var(--violet11);
   }
-  .TabsTrigger[data-state="active"] {
-    color: purple;
+  .TabsTrigger {
     font-weight: bold;
-    box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
+  }
+  .TabsTrigger[data-state="active"] {
+    color: #9333ea;
     transition: box-shadow 0.3s ease-in-out;
   }
   .TabsTrigger:focus {

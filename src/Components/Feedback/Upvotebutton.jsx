@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 import toast from "react-hot-toast";
 import { ChevronUp } from "react-feather";
 

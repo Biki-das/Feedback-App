@@ -9,19 +9,20 @@ const reducer = combineReducers({
   currentUser: userReducer,
 });
 
-// Get the persisted state from localStorage
+function getlocalReduxStorage(): string {
+  let value = localStorage.getItem("reduxState");
+  if (value === null || value === undefined) {
+    throw new Error("local storage item is missing");
+  }
+  return value;
+}
+
 const persistedState = localStorage.getItem("reduxState")
-  ? JSON.parse(localStorage.getItem("reduxState"))
+  ? JSON.parse(getlocalReduxStorage())
   : {};
 
-// Create the store with the persisted state
-export const store = createStore(
-  reducer,
-  persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = createStore(reducer, persistedState);
 
-// Subscribe to store changes and save the state to localStorage
 store.subscribe(() => {
   localStorage.setItem("reduxState", JSON.stringify(store.getState()));
 });

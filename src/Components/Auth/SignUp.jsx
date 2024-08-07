@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { supabase } from "../Supabase/Supabaseconfig";
+import { supabase } from "../../Supabase/Supabaseconfig";
 
 function SignUp({ avatarUrl, setUser }) {
   const [fullName, setFullName] = React.useState("");

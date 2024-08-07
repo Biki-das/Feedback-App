@@ -12,7 +12,7 @@ function Feedbackinfo({
   isDetailPage = false,
 }) {
   return isDetailPage ? (
-    <div className="order-1 md:order-2">
+    <div className="order-1 md:order-2 list-none">
       <div className="flex flex-col">
         <div className="flex gap-x-2 items-center">
           <img
@@ -51,7 +51,7 @@ function Feedbackinfo({
     </div>
   ) : (
     <Link to={`/feedback/${id}`} className="order-1 md:order-2">
-      <div className="flex flex-col">
+      <div className="flex flex-col list-none">
         <div className="flex gap-x-2">
           <img
             className="h-[30px] w-[30px] rounded-full object-cover"
